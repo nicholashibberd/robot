@@ -21,5 +21,16 @@ describe Robot do
         end
       end
     end
+
+    describe "commands" do
+      context "robot has not been placed" do
+        it "asks to be placed" do
+          commands = %w(MOVE LEFT RIGHT REPORT)
+          commands.each do |command|
+            expect(subject.respond(command)).to eq("Please place the robot")
+          end
+        end
+      end
+    end
   end
 end
