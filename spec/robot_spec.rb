@@ -30,4 +30,12 @@ describe Robot do
       end
     end
   end
+
+  describe "RIGHT" do
+    it "turns the robot to the right" do
+      subject.respond("PLACE 1,1,NORTH")
+      subject.respond("RIGHT")
+      expect(subject.respond("REPORT")).to eq("Output: 1,1,EAST")
+    end
+  end
 end
