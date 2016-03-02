@@ -6,6 +6,8 @@ class Robot
       place(match[:x], match[:y], match[:f])
     elsif command == "REPORT"
       report
+    elsif command == "LEFT"
+      turn_left
     elsif command == "RIGHT"
       turn_right
     end
@@ -26,8 +28,16 @@ class Robot
   end
 
   def turn_right
-    index = (DIRECTIONS.index(@f) + 1) % 4
-    @f = DIRECTIONS[index]
+    turn(DIRECTIONS)
+  end
+
+  def turn_left
+    turn(DIRECTIONS.reverse)
+  end
+
+  def turn(directions)
+    index = (directions.index(@f) + 1) % 4
+    @f = directions[index]
   end
 
   def report

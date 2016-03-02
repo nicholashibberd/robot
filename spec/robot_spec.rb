@@ -31,11 +31,32 @@ describe Robot do
     end
   end
 
-  describe "RIGHT" do
-    it "turns the robot to the right" do
-      subject.respond("PLACE 1,1,NORTH")
-      subject.respond("RIGHT")
-      expect(subject.respond("REPORT")).to eq("Output: 1,1,EAST")
+  describe "turning left and right" do
+    directions = {
+      "NORTH" => "EAST",
+      "EAST" => "SOUTH",
+      "SOUTH" => "WEST",
+      "WEST" => "NORTH",
+    }
+
+    describe "RIGHT" do
+      directions.each do |current, expected|
+        it "turns the robot to the right" do
+          subject.respond("PLACE 1,1,#{current}")
+          subject.respond("RIGHT")
+          expect(subject.respond("REPORT")).to eq("Output: 1,1,#{expected}")
+        end
+      end
+    end
+
+    describe "LEFT" do
+      directions.invert.each do |current, expected|
+        it "turns the robot to the left" do
+          subject.respond("PLACE 1,1,#{current}")
+          subject.respond("LEFT")
+          expect(subject.respond("REPORT")).to eq("Output: 1,1,#{expected}")
+        end
+      end
     end
   end
 end
