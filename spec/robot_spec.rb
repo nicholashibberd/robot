@@ -79,10 +79,19 @@ describe Robot do
     end
 
     context "robot is not on the edge of the grid" do
-      it "moves in the direction it is facing" do
-        subject.respond("PLACE 0,0,NORTH")
-        subject.respond("MOVE")
-        expect(subject.respond("REPORT")).to eq("Output: 0,1,NORTH")
+      placements = {
+        "0,0,NORTH" => "0,1,NORTH",
+        "4,4,WEST" => "3,4,WEST",
+        "4,4,SOUTH" => "4,3,SOUTH",
+        "0,0,EAST" => "1,0,EAST",
+      }
+
+      placements.each do |original, expected|
+        it "moves in the direction it is facing" do
+          subject.respond("PLACE #{original}")
+          subject.respond("MOVE")
+          expect(subject.respond("REPORT")).to eq("Output: #{expected}")
+        end
       end
     end
   end
