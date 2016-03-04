@@ -1,12 +1,12 @@
 # Toy Robot Simulator
 
-To run
+## To run
 
 ```bash
 ruby robot_cli.rb
 ```
 
-Example usage
+## Example usage
 
 ```
 PLACE 1,2,EAST
@@ -16,4 +16,9 @@ LEFT
 MOVE
 REPORT
 Output: 3,3,NORTH
+```
+
+## Running tests
+```bash
+bundle exec rspec
 ```
