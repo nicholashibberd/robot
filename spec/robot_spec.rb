@@ -64,9 +64,9 @@ describe Robot do
     context "robot is on the edge of the grid" do
       placements = [
         "4,4,NORTH",
-        "4,4,WEST",
+        "0,0,WEST",
         "0,0,SOUTH",
-        "0,0,EAST",
+        "4,4,EAST",
       ]
 
       placements.each do |placement|

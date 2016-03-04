@@ -45,9 +45,9 @@ class Robot
   def move
     case f
     when "NORTH" then self.y += 1 unless y == 4
-    when "WEST" then self.x += 1 unless x == 4
+    when "WEST" then self.x -= 1 unless x == 0
     when "SOUTH" then self.y -= 1 unless y == 0
-    when "EAST" then self.x -= 1 unless x == 0
+    when "EAST" then self.x += 1 unless x == 4
     end
   end
 
