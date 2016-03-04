@@ -4,14 +4,18 @@ class Robot
   def respond(command)
     if match = /^PLACE (?<x>[0-4]),(?<y>[0-4]),(?<f>#{DIRECTIONS.join("|")})$/.match(command)
       place(match[:x], match[:y], match[:f])
+      nil
     elsif command == "REPORT"
       report if placed?
     elsif command == "LEFT"
       turn_left if placed?
+      nil
     elsif command == "RIGHT"
       turn_right if placed?
+      nil
     elsif command == "MOVE"
       move if placed?
+      nil
     end
   end
 

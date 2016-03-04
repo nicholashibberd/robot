@@ -1,5 +1,10 @@
+require 'readline'
+require './robot'
+
 robot = Robot.new
 
 while buf = Readline.readline("> ", true)
-  robot.respond(buf)
+  if response = robot.respond(buf)
+    p response
+  end
 end
