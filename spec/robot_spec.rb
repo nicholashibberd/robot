@@ -40,6 +40,13 @@ describe Robot do
     }
 
     describe "RIGHT" do
+      context "before robot is placed" do
+        it "ignores the command" do
+          subject.respond("RIGHT")
+          expect(subject.respond("REPORT")).to be_nil
+        end
+      end
+
       directions.each do |current, expected|
         it "turns the robot to the right" do
           subject.respond("PLACE 1,1,#{current}")
@@ -50,6 +57,13 @@ describe Robot do
     end
 
     describe "LEFT" do
+      context "before robot is placed" do
+        it "ignores the command" do
+          subject.respond("LEFT")
+          expect(subject.respond("REPORT")).to be_nil
+        end
+      end
+
       directions.invert.each do |current, expected|
         it "turns the robot to the left" do
           subject.respond("PLACE 1,1,#{current}")
@@ -61,6 +75,13 @@ describe Robot do
   end
 
   describe "MOVE" do
+    context "before robot is placed" do
+      it "ignores the command" do
+        subject.respond("MOVE")
+        expect(subject.respond("REPORT")).to be_nil
+      end
+    end
+
     context "robot is on the edge of the grid" do
       placements = [
         "4,4,NORTH",

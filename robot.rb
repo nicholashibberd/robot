@@ -5,13 +5,13 @@ class Robot
     if match = /^PLACE (?<x>[0-4]),(?<y>[0-4]),(?<f>#{DIRECTIONS.join("|")})$/.match(command)
       place(match[:x], match[:y], match[:f])
     elsif command == "REPORT"
-      report
+      report if placed?
     elsif command == "LEFT"
-      turn_left
+      turn_left if placed?
     elsif command == "RIGHT"
-      turn_right
+      turn_right if placed?
     elsif command == "MOVE"
-      move
+      move if placed?
     end
   end
 
@@ -52,8 +52,6 @@ class Robot
   end
 
   def report
-    if placed?
-      "Output: #{x},#{y},#{f}"
-    end
+    "Output: #{x},#{y},#{f}"
   end
 end
