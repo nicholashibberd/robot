@@ -116,4 +116,44 @@ describe Robot do
       end
     end
   end
+
+  describe "end to end tests" do
+    # testing the examples in the spec
+
+    examples = [
+      {
+        commands: [
+          "PLACE 0,0,NORTH",
+          "MOVE"
+        ],
+        output: "Output: 0,1,NORTH"
+      },
+      {
+        commands: [
+          "PLACE 0,0,NORTH",
+          "LEFT"
+        ],
+        output: "Output: 0,0,WEST"
+      },
+      {
+        commands: [
+          "PLACE 1,2,EAST",
+          "MOVE",
+          "MOVE",
+          "LEFT",
+          "MOVE",
+        ],
+        output: "Output: 3,3,NORTH"
+      },
+    ]
+
+    examples.each do |example|
+      it "executes every command and returns correct output" do
+        example[:commands].each do |command|
+          subject.respond(command)
+        end
+        expect(subject.respond("REPORT")).to eq(example[:output])
+      end
+    end
+  end
 end
