@@ -59,4 +59,21 @@ describe Robot do
       end
     end
   end
+
+  describe "MOVE" do
+    context "robot is on the edge of the grid" do
+      it "does not move" do
+        subject.respond("PLACE 0,0,SOUTH")
+        subject.respond("MOVE")
+        expect(subject.respond("REPORT")).to eq("Output: 0,0,SOUTH")
+      end
+
+    context "robot is not on the edge of the grid"
+      it "moves in the direction it is facing" do
+        subject.respond("PLACE 0,0,NORTH")
+        subject.respond("MOVE")
+        expect(subject.respond("REPORT")).to eq("Output: 0,1,NORTH")
+      end
+    end
+  end
 end

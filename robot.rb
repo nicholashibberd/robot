@@ -1,5 +1,5 @@
 class Robot
-  DIRECTIONS = %W(WEST NORTH EAST SOUTH)
+  DIRECTIONS = %w(WEST NORTH EAST SOUTH)
 
   def respond(command)
     if match = /^PLACE (?<x>[0-4]),(?<y>[0-4]),(?<f>#{DIRECTIONS.join("|")})$/.match(command)
@@ -10,17 +10,19 @@ class Robot
       turn_left
     elsif command == "RIGHT"
       turn_right
+    elsif command == "MOVE"
+      move
     end
   end
 
   private
 
-  attr_reader :x, :y, :f
+  attr_accessor :x, :y, :f
 
   def place(x, y, f)
-    @x = x
-    @y = y
-    @f = f
+    self.x = x.to_i
+    self.y = y.to_i
+    self.f = f
   end
 
   def placed?
@@ -36,8 +38,17 @@ class Robot
   end
 
   def turn(directions)
-    index = (directions.index(@f) + 1) % 4
-    @f = directions[index]
+    index = (directions.index(f) + 1) % 4
+    self.f = directions[index]
+  end
+
+  def move
+    case f
+    when "NORTH" then self.y += 1 unless y == 4
+    when "WEST" then self.x += 1 unless x == 4
+    when "SOUTH" then self.y -= 1 unless y == 0
+    when "EAST" then self.x -= 1 unless x == 0
+    end
   end
 
   def report
